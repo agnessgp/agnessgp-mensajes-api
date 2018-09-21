@@ -1,0 +1,1 @@
+INSERT INTO Mensajes (id, codigo, mensaje) VALUES (1,'CODACC', 'El código de acceso del usuario');
