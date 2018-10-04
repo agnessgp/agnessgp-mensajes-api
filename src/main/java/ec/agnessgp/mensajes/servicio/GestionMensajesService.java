@@ -3,8 +3,8 @@ package ec.agnessgp.mensajes.servicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ec.agnessgp.mensajes.clase.MensajeTexto;
-import ec.agnessgp.mensajes.clase.OperadorMovistar;
+import ec.agnessgp.mensajes.clases.MensajeTexto;
+import ec.agnessgp.mensajes.clases.TelefonoMovistar;
 import ec.agnessgp.mensajes.dao.MensajesRepository;
 import ec.agnessgp.mensajes.modelo.Mensajes;
 import ec.agnessgp.mensajes.modelo.Personas;
@@ -16,11 +16,14 @@ public class GestionMensajesService {
 	@Autowired
 	private MensajesRepository mensajesRepository;
 	
-	
-	public void enviarMensajeTextoMovistar(Personas persona) {
-		Mensajes mensajes = mensajesRepository.findByCodigo("CODACC");
+	public MensajeTexto obtenerMensajePorCodigo(String codigo) {
+		Mensajes mensajes = mensajesRepository.findByCodigo(codigo);
 		MensajeTexto mensajeTexto = new MensajeTexto(mensajes.getTitulo(),mensajes.getMensaje());
-		OperadorMovistar operadorMovistar = new OperadorMovistar(persona.getMediosContacto().getCelular());
+		return mensajeTexto;
+	}
+	
+	public void enviarMensajeMovistar(MensajeTexto mensajeTexto) {
+		TelefonoMovistar operadorMovistar = new TelefonoMovistar();
 		operadorMovistar.enviarMensaje(mensajeTexto);
 	}
 	

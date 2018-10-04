@@ -26,9 +26,10 @@ public class MediosContacto {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private Long idPersona;
 	private String telefono;
-	private String celular;
+	private String movistar;
+	private String claro;
+	private String cnt;
 	private String direccion;
 	private String correo;
 	
@@ -38,24 +39,13 @@ public class MediosContacto {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getIdPersona() {
-		return idPersona;
-	}
-	public void setIdPersona(Long idPersona) {
-		this.idPersona = idPersona;
-	}
 	public String getTelefono() {
 		return telefono;
 	}
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	public String getCelular() {
-		return celular;
-	}
-	public void setCelular(String celular) {
-		this.celular = celular;
-	}
+	
 	public String getDireccion() {
 		return direccion;
 	}
@@ -68,6 +58,25 @@ public class MediosContacto {
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
+	public String getMovistar() {
+		return movistar;
+	}
+	public void setMovistar(String movistar) {
+		this.movistar = movistar;
+	}
+	public String getClaro() {
+		return claro;
+	}
+	public void setClaro(String claro) {
+		this.claro = claro;
+	}
+	public String getCnt() {
+		return cnt;
+	}
+	public void setCnt(String cnt) {
+		this.cnt = cnt;
+	}
+	
 	
 }
 	
