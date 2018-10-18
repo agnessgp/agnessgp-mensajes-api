@@ -6,9 +6,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+@JsonSerialize
 @Entity
-@Table(name="ban_mensajes_t")	
-public class Mensajes {
+@Table(name="ban_mensaje_t")	
+public class Mensaje {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -18,7 +21,7 @@ public class Mensajes {
 	private String mensaje;
 	
 	
-	public Mensajes() {
+	public Mensaje() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

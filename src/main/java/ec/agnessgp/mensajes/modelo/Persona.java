@@ -8,16 +8,15 @@ package ec.agnessgp.mensajes.modelo;
 import java.time.LocalDate;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /** 
  * <b>
@@ -29,7 +28,7 @@ import javax.persistence.Table;
 */
 @Entity
 @Table(name="ban_personas_t")		
-public class Personas {
+public class Persona {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -62,18 +61,8 @@ public class Personas {
 	@Column(name="fecha_registro")
 	private Date fechaRegistro;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@PrimaryKeyJoinColumn
-	private MediosContacto mediosContacto;
-	
-		
-	@PrePersist
-	private void prePersist() {
-		fechaRegistro = new Date();
-	}
-	
 
-	public Personas() {
+	public Persona() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -167,17 +156,4 @@ public class Personas {
 		this.foto = foto;
 	}
 
-
-	public MediosContacto getMediosContacto() {
-		return mediosContacto;
-	}
-
-
-	public void setContacto(MediosContacto mediosContacto) {
-		this.mediosContacto = mediosContacto;
-	}
-	
-	
-	
-	
 }

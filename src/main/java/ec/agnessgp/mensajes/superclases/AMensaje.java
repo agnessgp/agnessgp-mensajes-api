@@ -16,8 +16,6 @@ public abstract class AMensaje {
 	private String titulo;
 	private String mensaje;
 	
-	
-	
 	public AMensaje(String titulo, String mensaje) {
 		super();
 		this.titulo = titulo;

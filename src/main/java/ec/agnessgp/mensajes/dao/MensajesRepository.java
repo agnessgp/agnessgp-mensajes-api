@@ -2,9 +2,9 @@ package ec.agnessgp.mensajes.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import ec.agnessgp.mensajes.modelo.Mensajes;
+import ec.agnessgp.mensajes.modelo.Mensaje;
 
-public interface MensajesRepository extends JpaRepository<Mensajes, Long> {
+public interface MensajesRepository extends JpaRepository<Mensaje, Long> {
 
-	Mensajes findByCodigo(String codigo);
+	Mensaje findByCodigo(String codigo);
 }

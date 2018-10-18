@@ -13,7 +13,7 @@ package ec.agnessgp.mensajes.enumeracion;
  * @version $Revision: 1.0 $ <p>[$Author: Patricio Pilco $, $Date: 22 sep. 2018 $]</p>
 */
 public enum OperadoraEnum {
-	
+	DESCONOCIDO(0,"Desconocido"),
 	MOVISTAR(1,"Movistar"),
 	CLARO(2,"Claro"),
 	CNT(3,"Cnt");

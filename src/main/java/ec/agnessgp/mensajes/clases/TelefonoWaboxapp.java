@@ -2,7 +2,7 @@ package ec.agnessgp.mensajes.clases;
 
 import ec.agnessgp.mensajes.superclases.ATelefono;
 
-public class TelefonoMovistar extends ATelefono {
+public class TelefonoWaboxapp extends ATelefono {
 
 	@Override
 	public void iniciarLlamada() {
@@ -28,14 +28,7 @@ public class TelefonoMovistar extends ATelefono {
 		
 	}
 
-	/* (non-Javadoc)
-	* @see ec.agnessgp.mensajes.interfaz.IMensaje#enviarMensaje(ec.agnessgp.mensajes.clase.MensajeTexto)
-	*/ 
-	@Override
-	public void enviarMensaje(MensajeTexto mensajeTexto) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	
 }
