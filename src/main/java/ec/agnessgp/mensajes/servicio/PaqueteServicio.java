@@ -4,6 +4,8 @@
  */ 
 package ec.agnessgp.mensajes.servicio;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +28,9 @@ public class PaqueteServicio {
 	
 	public Iterable<Paquete> listarPaqueteTodos() {
 		return paqueteDao.findAll();
+	}
+	
+	public Optional<Paquete> obtenerPaquete(Long id) {
+		return paqueteDao.findById(id);
 	}
 }

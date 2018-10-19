@@ -7,8 +7,11 @@ package ec.agnessgp.mensajes.servicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ec.agnessgp.mensajes.clienteRest.WaboxappClienteRest;
 import ec.agnessgp.mensajes.dao.WaboxappRepository;
 import ec.agnessgp.mensajes.modelo.Waboxapp;
+import ec.agnessgp.mensajes.respuesta.rest.WaboxappRespuesta;
+import ec.agnessgp.mensajes.solicitud.rest.WaboxappSolicitud;
 
 /** 
  * <b>
@@ -24,11 +27,18 @@ public class WaboxappService {
 	@Autowired 
 	WaboxappRepository waboxappDao;
 	
-	public Waboxapp obtenerWaboxapp(Long pais,String telefono) {
+	public Waboxapp obtenerWaboxappTelefono(Long pais,String telefono) {
 		return waboxappDao.findByTelefono(telefono);
 	}
 	
 	public Waboxapp obtenerWaboxappPredeterminado() {
-		return obtenerWaboxapp(new Long(1), "593991363467");
+		return obtenerWaboxappTelefono(new Long(1), "593991363467");
+	}
+	
+	public WaboxappRespuesta enviarWaboxappChat(WaboxappSolicitud waboxappSolicitud) {
+		Waboxapp waboxapp = obtenerWaboxappPredeterminado();
+		WaboxappClienteRest clienteRest = new WaboxappClienteRest(waboxapp.getUrl(), waboxapp.getContexto());
+		WaboxappRespuesta respuesta = clienteRest.getWaboxappEnviarChat(waboxappSolicitud);
+		return respuesta;
 	}
 }

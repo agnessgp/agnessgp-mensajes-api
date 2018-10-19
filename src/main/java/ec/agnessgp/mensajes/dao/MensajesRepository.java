@@ -6,5 +6,4 @@ import ec.agnessgp.mensajes.modelo.Mensaje;
 
 public interface MensajesRepository extends JpaRepository<Mensaje, Long> {
 
-	Mensaje findByCodigo(String codigo);
 }
