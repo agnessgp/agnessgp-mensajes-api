@@ -52,4 +52,8 @@ public class CompraService {
 		return crearNuevo(cliente, paquete.get());
 	}
 	
+	public Optional<Compra> obtenerCompraPorId(Long id) {
+		return compraDao.findById(id);
+	}
+	
 }

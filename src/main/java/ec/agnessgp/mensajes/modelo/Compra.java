@@ -6,7 +6,9 @@ package ec.agnessgp.mensajes.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -51,7 +54,9 @@ public class Compra implements Serializable{
 	@JoinColumn(name="paquete_id")
 	private Paquete paquete;
 
-	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "compra_id")
+	private List<Enviado> listaEnviados;
 	
 	public Compra() {
 		super();
@@ -102,6 +107,14 @@ public class Compra implements Serializable{
 
 	public void setFechaRegistro(Date fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
+	}
+
+	public List<Enviado> getListaEnviados() {
+		return listaEnviados;
+	}
+
+	public void setListaEnviados(List<Enviado> listaEnviados) {
+		this.listaEnviados = listaEnviados;
 	}
 	
 	
