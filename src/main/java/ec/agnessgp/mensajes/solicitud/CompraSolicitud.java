@@ -15,27 +15,45 @@ package ec.agnessgp.mensajes.solicitud;
 public class CompraSolicitud {
 
 	private String telefono;
-	private Long paqueteId;
+	private Long idPaquete;
+	private Long idAutorizacion;
 	
-	public CompraSolicitud(String telefono, Long paqueteId) {
-		this.telefono = telefono;
-		this.paqueteId = paqueteId;
-	}
 	public CompraSolicitud() {
-		// TODO Auto-generated constructor stub
 	}
+	
+	public CompraSolicitud(String telefono, Long idPaquete, Long idAutorizacion) {
+		super();
+		this.telefono = telefono;
+		this.idPaquete = idPaquete;
+		this.idAutorizacion = idAutorizacion;
+	}
+
 	public String getTelefono() {
 		return telefono;
 	}
+
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	public Long getPaqueteId() {
-		return paqueteId;
+
+	public Long getIdPaquete() {
+		return idPaquete;
 	}
-	public void setPaqueteId(Long paqueteId) {
-		this.paqueteId = paqueteId;
+
+	public void setIdPaquete(Long idPaquete) {
+		this.idPaquete = idPaquete;
 	}
+
+	public Long getIdAutorizacion() {
+		return idAutorizacion;
+	}
+
+	public void setIdAutorizacion(Long idAutorizacion) {
+		this.idAutorizacion = idAutorizacion;
+	}
+
+	
+
 	
 	
 }

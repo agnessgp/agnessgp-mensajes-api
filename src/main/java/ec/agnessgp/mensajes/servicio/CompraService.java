@@ -10,9 +10,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ec.agnessgp.mensajes.dao.AutorizacionRepository;
 import ec.agnessgp.mensajes.dao.ClienteRepository;
 import ec.agnessgp.mensajes.dao.CompraRepository;
 import ec.agnessgp.mensajes.dao.PaqueteRepository;
+import ec.agnessgp.mensajes.modelo.Autorizacion;
 import ec.agnessgp.mensajes.modelo.Cliente;
 import ec.agnessgp.mensajes.modelo.Compra;
 import ec.agnessgp.mensajes.modelo.Paquete;
@@ -37,19 +39,29 @@ public class CompraService {
 	@Autowired
 	PaqueteRepository paqueteDao;
 	
-	public Compra crearNuevo(Cliente cliente,Paquete paquete) {
+	@Autowired
+	AutorizacionRepository autorizacionDao;
+	
+	public Compra crearNuevo(Cliente cliente,Paquete paquete,Autorizacion autorizacion) {
 		Compra compra =new Compra();
 		compra.setFechaRegistro(new Date());
 		compra.setCliente(cliente);
 		compra.setPaquete(paquete);
-		compra.setEstado("SOLICITADO");
+		compra.setAutorizacion(autorizacion);
+		compra.setEstado("SOL");
 		return compraDao.save(compra);
 	}
 	
-	public Compra crearNuevo(String telefono,Long paqueteId) {
+	public Compra crearNuevo(String telefono,Long idPaquete, Long idAutorizacion) {
 		Cliente cliente = clienteDao.findByTelefono(telefono);
-		Optional<Paquete> paquete = paqueteDao.findById(paqueteId);
-		return crearNuevo(cliente, paquete.get());
+		Optional<Paquete> paqueteOptional = paqueteDao.findById(idPaquete);
+		Optional<Autorizacion> autorizacionOptional = autorizacionDao.findById(idAutorizacion);
+		if(paqueteOptional.isPresent() && autorizacionOptional.isPresent()) {
+			Paquete paquete = paqueteOptional.get();
+			Autorizacion autorizacion = autorizacionOptional.get();
+			return crearNuevo(cliente, paquete,autorizacion);
+		}
+		return null;
 	}
 	
 	public Optional<Compra> obtenerCompraPorId(Long id) {

@@ -6,7 +6,7 @@ package ec.agnessgp.mensajes.dao;
 
 import org.springframework.data.repository.CrudRepository;
 
-import ec.agnessgp.mensajes.modelo.Mensaje;
+import ec.agnessgp.mensajes.modelo.InformacionMensaje;
 
 /** 
  * <b>
@@ -16,6 +16,6 @@ import ec.agnessgp.mensajes.modelo.Mensaje;
  * @author Patricio Pilco
  * @version $Revision: 1.0 $ <p>[$Author: Patricio Pilco $, $Date: 22 oct. 2018 $]</p>
 */
-public interface MensajeRepository extends CrudRepository<Mensaje, Long>{
+public interface InformacionMensajeRepository extends CrudRepository<InformacionMensaje, Long>{
 
 }

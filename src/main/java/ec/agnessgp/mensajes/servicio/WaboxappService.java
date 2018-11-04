@@ -35,10 +35,12 @@ public class WaboxappService {
 		return obtenerWaboxappTelefono(new Long(1), "593991363467");
 	}
 	
-	public WaboxappRespuesta enviarWaboxappChat(WaboxappSolicitud waboxappSolicitud) {
+	public WaboxappRespuesta enviarWaboxappTexto(String tlfDestino, String texto, String idUnico) {
 		Waboxapp waboxapp = obtenerWaboxappPredeterminado();
+		WaboxappSolicitud waboxappSolicitud = new WaboxappSolicitud(waboxapp.getApi_token(), waboxapp.getTelefono(), tlfDestino, idUnico, texto);
 		WaboxappClienteRest clienteRest = new WaboxappClienteRest(waboxapp.getUrl(), waboxapp.getContexto());
 		WaboxappRespuesta respuesta = clienteRest.getWaboxappEnviarChat(waboxappSolicitud);
 		return respuesta;
 	}
+	
 }

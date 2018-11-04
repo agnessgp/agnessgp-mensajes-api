@@ -31,6 +31,10 @@ public class Telefono {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String numero;
+	
+	//private String origen;
+	//private Date fechaCreacion;
+	//private String contacto;
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="pais_id")

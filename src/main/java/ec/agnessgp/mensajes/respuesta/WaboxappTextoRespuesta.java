@@ -2,7 +2,7 @@
  * Copyright 2018 AGNESSGP - ECUADOR 
  * Todos los derechos reservados
  */ 
-package ec.agnessgp.mensajes.respuesta.rest;
+package ec.agnessgp.mensajes.respuesta;
 
 /** 
  * <b>
@@ -10,19 +10,18 @@ package ec.agnessgp.mensajes.respuesta.rest;
  * </b>
  *  
  * @author Patricio Pilco
- * @version $Revision: 1.0 $ <p>[$Author: Patricio Pilco $, $Date: 19 oct. 2018 $]</p>
+ * @version $Revision: 1.0 $ <p>[$Author: Patricio Pilco $, $Date: 29 oct. 2018 $]</p>
 */
-public class WaboxappRespuesta {
+public class WaboxappTextoRespuesta {
 
 	private String success;
 	private String custom_uid;
 	private String error;
 	
-	public WaboxappRespuesta() {
-		
+	public WaboxappTextoRespuesta() {
 	}
-	
-	public WaboxappRespuesta(String success, String custom_uid, String error) {
+
+	public WaboxappTextoRespuesta(String success, String custom_uid, String error) {
 		super();
 		this.success = success;
 		this.custom_uid = custom_uid;
@@ -53,7 +52,6 @@ public class WaboxappRespuesta {
 		this.error = error;
 	}
 	
-	
-	
+
 	
 }

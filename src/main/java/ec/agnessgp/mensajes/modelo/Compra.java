@@ -16,7 +16,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -49,14 +51,16 @@ public class Compra implements Serializable{
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
 	
-	@JsonManagedReference
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="paquete_id")
-	private Paquete paquete;
-
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    private Paquete paquete;
+	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "compra_id")
 	private List<Enviado> listaEnviados;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Autorizacion autorizacion;
 	
 	public Compra() {
 		super();
@@ -116,8 +120,13 @@ public class Compra implements Serializable{
 	public void setListaEnviados(List<Enviado> listaEnviados) {
 		this.listaEnviados = listaEnviados;
 	}
-	
-	
-	
-	
+
+	public Autorizacion getAutorizacion() {
+		return autorizacion;
+	}
+
+	public void setAutorizacion(Autorizacion autorizacion) {
+		this.autorizacion = autorizacion;
+	}
+
 }

@@ -7,23 +7,17 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ec.agnessgp.mensajes.dao.ClienteRepository;
 import ec.agnessgp.mensajes.modelo.Compra;
 import ec.agnessgp.mensajes.modelo.Enviado;
-import ec.agnessgp.mensajes.modelo.Mensaje;
+import ec.agnessgp.mensajes.modelo.InformacionMensaje;
 import ec.agnessgp.mensajes.modelo.Paquete;
 import ec.agnessgp.mensajes.modelo.Telefono;
-import ec.agnessgp.mensajes.respuesta.rest.WaboxappRespuesta;
-import ec.agnessgp.mensajes.solicitud.rest.WaboxappSolicitud;
 
 @Service
 public class GestionMensajesService {
 
 	@Autowired
 	CompraService compraServicio;
-
-	@Autowired
-	MensajeService mensajeServicio;
 
 	@Autowired
 	TelefonoService telefonoService;
@@ -36,47 +30,43 @@ public class GestionMensajesService {
 
 	@Autowired
 	private WaboxappService waboxappService;
-
+	
 	@Autowired
-	ClienteRepository clienteDao;
-
+	InformacionMensajeService informacionMensajeService;
+	
+	
 	private List<Telefono> generarAleatoriosPack(Paquete paquete) {
 		List<Telefono> listaNumerosAleatorio = telefonoService.randomTelefono(paquete.getMensajes().intValue());
 		return listaNumerosAleatorio;
 	}
 
-	private boolean enviarMensajeWaboxapp(String telefono) {
-		WaboxappSolicitud waboxappSolicitud = new WaboxappSolicitud();
-		WaboxappRespuesta waboxappRespuesta = waboxappService.enviarWaboxappChat(waboxappSolicitud);
-		if (waboxappRespuesta != null)
-			return true;
-		return true;
-	}
 
-	private String enviarMensajeWaboxappMasivo(List<Telefono> numerosTelefonoPack) {
+	private String enviarMensajeWaboxappMasivoTexto(List<Telefono> numerosTelefonoPack ,String texto, String codigo) {
 		String numerosTelefonoPackEnviados = "";
 
 		for (Telefono telefono : numerosTelefonoPack) {
-			if (enviarMensajeWaboxapp(telefono.getNumero())) {
+				waboxappService.enviarWaboxappTexto(telefono.getNumero(),texto,codigo.concat("-").concat(telefono.getNumero()));
 				numerosTelefonoPackEnviados = numerosTelefonoPackEnviados.concat(telefono.getNumero()).concat(";");
 				System.out.println(" -> Teléfono: " + telefono.getNumero());
-			}
 		}
 		return numerosTelefonoPackEnviados;
 	}
+	
 
-	public Enviado enviarMensajesPaquete(String texto,Long compraId) {
-		Optional<Compra> optionalCompra = compraServicio.obtenerCompraPorId(compraId);
+	public Enviado enviarMensajesPaqueteTexto(String texto,Long idCompra) {
+		Optional<Compra> optionalCompra = compraServicio.obtenerCompraPorId(idCompra);
 		if(optionalCompra.isPresent()) {
-			Mensaje mensaje = mensajeServicio.crearMensaje(texto,optionalCompra.get());
+			InformacionMensaje mensaje = informacionMensajeService.crearInformacionMensajeTexto(texto, idCompra);
 			Optional<Paquete> paqueteCompra = paqueteServicio.obtenerPaquete(mensaje.getCompra().getPaquete().getId());
 			if(paqueteCompra.isPresent()) {
 				List<Telefono> numerosTelefonoPack= generarAleatoriosPack(paqueteCompra.get());
-				String mensajes = enviarMensajeWaboxappMasivo(numerosTelefonoPack);
+				String mensajes = enviarMensajeWaboxappMasivoTexto(numerosTelefonoPack,texto,optionalCompra.get().getAutorizacion().getCodigo());
 				return enviadoServicio.crearEnviado(new Enviado(mensaje.getTexto(),mensajes,new Date(),mensaje.getCompra()));
 			}
 		}
 		return null;
 	}
+	
+
 
 }

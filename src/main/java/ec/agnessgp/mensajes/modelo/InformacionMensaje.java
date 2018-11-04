@@ -25,25 +25,40 @@ import javax.persistence.Table;
 */
 @Entity
 @Table(name="ban_mensajes_t")	
-public class Mensaje {
+public class InformacionMensaje {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	private String tipoInformacion;
 	private String texto;
+	private String imagen;
+	private String pathImagen;
 	private Date fechaCreacion;
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@MapsId
 	private Compra compra;
 	
-	public Mensaje(String texto, Date fechaCreacion, Compra compra) {
-		super();
+	public InformacionMensaje(String tipoInformacion,String texto, Date fechaCreacion, Compra compra) {
+		this.tipoInformacion = tipoInformacion;
 		this.texto = texto;
 		this.fechaCreacion = fechaCreacion;
 		this.compra = compra;
 	}
 	
+	
+	
+	public InformacionMensaje(String tipoInformacion,String imagen, String pathImagen, Date fechaCreacion, Compra compra) {
+		this.tipoInformacion = tipoInformacion;
+		this.imagen = imagen;
+		this.pathImagen = pathImagen;
+		this.fechaCreacion = fechaCreacion;
+		this.compra = compra;
+	}
+
+
+
 	public Long getId() {
 		return id;
 	}
@@ -68,7 +83,28 @@ public class Mensaje {
 	public void setCompra(Compra compra) {
 		this.compra = compra;
 	}
-	
-	
+
+	public String getImagen() {
+		return imagen;
+	}
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+
+	public String getPathImagen() {
+		return pathImagen;
+	}
+
+	public void setPathImagen(String pathImagen) {
+		this.pathImagen = pathImagen;
+	}
+
+	public String getTipoInformacion() {
+		return tipoInformacion;
+	}
+
+	public void setTipoInformacion(String tipoInformacion) {
+		this.tipoInformacion = tipoInformacion;
+	}
 	
 }
